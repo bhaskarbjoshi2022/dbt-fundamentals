@@ -1,0 +1,75 @@
+version: 2
+
+sources:
+  - name: citi_bikes_manual
+    description: Raw data from Citi Bikes.
+    database: dbt_raw
+    schema: citi_bikes
+    tables:
+      - name: citibike_trips
+  
+  - name: citi_bikes
+    description: Raw data from Citi Bikes.
+    database: dbt_raw
+    schema: citi_bikes
+    tables:
+
+      - name: citi_bikes_ext
+        external:
+          location: '@dbt_raw.citi_bikes.citibike_trips'
+          file_format: dbt_raw.citi_bikes.csv_star 
+          auto_refresh: false # depends on your S3 setup
+          # columns:
+          #   - name: properties
+          #     data_type: variant
+        columns:
+          - name: TRIPDURATION
+            data_type: INT
+            description: "Duration of the trip"
+          - name: STARTTIME
+            data_type: DATETIME
+            description: "Start time of the trip"
+          - name: STOPTIME
+            data_type: DATETIME
+            description: "End time of the trip"
+          - name: START_STATION_ID
+            data_type: INT
+            description: "Start Station ID"
+          - name: START_STATION_NAME
+            data_type: VARCHAR(500)
+            description: "Start Station Name"
+          - name: START_STATION_LATITUDE
+            data_type: FLOAT
+            description: "Start Station Latitude"
+          - name: START_STATION_LONGITUDE
+            data_type: FLOAT
+            description: "Start Station Longitude"
+          - name: END_STATION_ID
+            data_type: VARCHAR(50)
+            description: "End Station ID"
+          - name: END_STATION_NAME
+            data_type: VARCHAR(500)
+            description: "End Station Name"
+          - name: END_STATION_LATITUDE
+            data_type: VARCHAR(50)
+            description: "End Station Latitude"
+          - name: END_STATION_LONGITUDE
+            data_type: VARCHAR(50)
+            description: "End Station Longitude"
+          - name: BIKEID
+            data_type: INT
+            description: "ID of the Bike"
+          - name: MEMBERSHIP_TYPE
+            data_type: VARCHAR(100)
+            description: "Type of the Membership"
+          - name: USERTYPE
+            data_type: VARCHAR(100)
+            description: "Type of the User"
+          - name: BIRTH_YEAR
+            data_type: VARCHAR(100)
+            description: "Birth Year of the User"
+          - name: GENDER
+            data_type: INT
+            description: "Gender of the User"                                          
+
+           

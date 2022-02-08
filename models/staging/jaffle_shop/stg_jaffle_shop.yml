@@ -9,6 +9,16 @@ models:
           tests:
             - unique
             - not_null
+            - assert_valid_ingestion_time:
+                config:
+                  severity: warn
+
+        - name: ingest_ts
+          description: TS.
+          tests:
+            - assert_valid_ingestion_time:
+                config:
+                  severity: warn
 
     - name: stg_orders
       description: Staged order data from our jaffle shop app.
