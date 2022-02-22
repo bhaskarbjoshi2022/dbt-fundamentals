@@ -5,5 +5,7 @@ select id as payment_id
      --amount is stored in cents, convert it to dollars
      , amount / 100 as amount
      , created as created_at
+     , source
+     , ingest_ts
 --from dbt_raw.stripe.payment
 from {{ source('stripe', 'payment') }}
