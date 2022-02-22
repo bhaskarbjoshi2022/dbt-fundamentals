@@ -1,7 +1,6 @@
-select
-    id as customer_id,
-    first_name,
-    last_name,
-    current_timestamp::timestamp_tz as ingest_ts
---from dbt_raw.jaffle_shop.customers
+select id as customer_id
+     , first_name
+     , last_name
+     , source
+     , ingest_ts
 from {{ source('jaffle_shop', 'customers') }}
