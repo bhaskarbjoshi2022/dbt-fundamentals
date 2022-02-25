@@ -1,6 +1,7 @@
 {{
   config(
     materialized='copy_into',
+    transient = False,
     tags = ['high_freq']
   )
 }}
