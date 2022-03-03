@@ -1,3 +1,11 @@
+{{
+  config(
+    materialized = 'incremental',
+    unique_key='customer_id',
+    transient = False
+  )
+}}
+
 with customers as(
     select * from {{ ref('stg_customers') }}
 ),

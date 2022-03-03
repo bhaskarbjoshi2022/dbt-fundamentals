@@ -36,8 +36,10 @@ models:
     marts:
       core:
         +materialized: table
+        +transient: false
       raw_vault:
         +materialized: table
+        +trasient: false
     stage_raw:
       +materizlized: table
       +copy_grant: true

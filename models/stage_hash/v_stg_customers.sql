@@ -1,15 +1,24 @@
-{{ config(materialized='view') }}
+{{
+  config(
+    materialized='view',
+    tags = ['daily']
+  )
+}}
 
 {%- set yaml_metadata -%}
 source_model: 
   jaffle_shop: "customers"
 derived_columns:
   LOAD_DATETIME: current_timestamp::timestamp_tz
-  EFFECTIVE_FROM: current_date
-  START_DATE: current_date
-  END_DATE: "TO_DATE('9999-31-12','YYYY-DD-MM')"
+  EFFECTIVE_FROM: current_date-1
+  VALID_FROM_DATE: current_date-1
+  VALID_TO_DATE: "TO_DATE('9999-31-12','YYYY-DD-MM')"
+
 hashed_columns:
-  CUSTOMER_HK: "ID"
+  CUSTOMER_HK:
+    columns:
+      - "ID"
+      - "VALID_FROM_DATE"
 
   CUSTOMER_HASHDIFF:
     is_hashdiff: true

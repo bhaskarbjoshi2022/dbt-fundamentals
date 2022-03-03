@@ -1,4 +1,10 @@
-{{ config(materialized='incremental')    }}
+{{
+  config(
+    materialized = 'incremental',
+    transient = False,
+    tags = ['daily']
+  )
+}}
 
 {%- set yaml_metadata -%}
 source_model: 
