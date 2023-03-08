@@ -6,4 +6,6 @@ packages:
   - package: dbt-labs/dbt_external_tables
     version: 0.8.0
   - package: calogica/dbt_date
-    version: 0.5.3    
+    version: 0.5.3
+  - package: dbt-labs/codegen
+    version: 0.5.0    
